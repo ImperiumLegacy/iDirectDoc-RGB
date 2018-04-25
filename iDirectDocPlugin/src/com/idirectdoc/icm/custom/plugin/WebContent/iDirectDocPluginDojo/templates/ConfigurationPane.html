@@ -1,0 +1,46 @@
+<div>
+	<!--  Please add your configuration pane -->
+    <table class="propertyTable" role="presentation">
+         <tr>
+            <td class="propertyRowLabel">
+                <span class="required">*</span>
+                <label for="${id}_askURL">Watson Ask URL:</label>&nbsp;
+                <div data-dojo-type="ecm.widget.HoverHelp" data-dojo-attach-point="askURL" message="Specify Watson Ask URL "></div>
+            </td>
+            <td class="propertyRowValue">
+                <div id="${id}_watsonAskURL" data-dojo-attach-point="watsonAskURL" data-dojo-attach-event="validator: _validateURL" data-dojo-type="ecm.widget.ValidationSimpleTextarea" required="false" trim="true" propercase="false"></div>
+            </td>
+        </tr>
+         <tr>
+            <td class="propertyRowLabel">
+                <span class="required">*</span>
+                <label for="${id}_dictationURL">Watson Dictation URL:</label>&nbsp;
+                <div data-dojo-type="ecm.widget.HoverHelp" data-dojo-attach-point="dictationURL" message="Specify Watson Dictation URL"></div>
+            </td>
+            <td class="propertyRowValue">
+                <div id="${id}_watsonDictationURL" data-dojo-attach-point="watsonDictationURL" data-dojo-attach-event="validator: _validateURL" data-dojo-type="ecm.widget.ValidationSimpleTextarea" required="false" trim="true" propercase="false"></div>
+            </td>
+        </tr>
+         <tr>
+            <td class="propertyRowLabel">
+                <span class="required">*</span>
+                <label for="${id}_visualRecognitionURL">Watson Visual Recognition URL:</label>&nbsp;
+                <div data-dojo-type="ecm.widget.HoverHelp" data-dojo-attach-point="visualRecognitionURL" message="Specify Watson Visual Recognition URL "></div>
+            </td>
+            <td class="propertyRowValue">
+                <div id="${id}_watsonVisualRecognitionURL" data-dojo-attach-point="watsonVisualRecognitionURL" data-dojo-attach-event="validator: _validateURL" data-dojo-type="ecm.widget.ValidationSimpleTextarea" required="false" trim="true" propercase="false"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="propertyRowLabel">
+                <span class="required">*</span>
+                <label for="${id}_videoConferenceURL">Video Conference URL:</label>&nbsp;
+                <div data-dojo-type="ecm.widget.HoverHelp" data-dojo-attach-point="videoURL" message="Specify Video Conference URL"></div>
+            </td>
+            <td class="propertyRowValue">
+                <div id="${id}_videoConferenceURL" data-dojo-attach-point="videoConferenceURL" data-dojo-attach-event="validator: _validateURL" data-dojo-type="ecm.widget.ValidationSimpleTextarea" required="false" trim="true" propercase="false"></div>
+            </td>
+        </tr>
+    </table>
+
+</div>

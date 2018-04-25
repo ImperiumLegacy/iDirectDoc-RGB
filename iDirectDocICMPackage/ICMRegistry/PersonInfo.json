@@ -1,0 +1,50 @@
+{
+    "id": "PersonInfo",
+    "title": "Person Information",
+    "category": "iDirectDocWidgets",
+    "description": "Displays information a person. It displays the currently logged on user or the user recieved via an event.",
+    "definition": "PersonInfo.json",
+    "preview": "images/caseinfo_preview.png",
+    "icon": "images/caseinfo_icon.png",
+    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.personinfo.PersonInfo",
+    "help": "acmwrh94.htm",
+    "previewThumbnail": "images/caseinfo_thumb.gif",
+    "properties": [
+    	{
+            "propertyType": "property",
+            "type": "string",
+            "id": "propertylist",
+            "defaultValue": "",
+            "required": false,
+            "visibility": true,
+            "title": "Comma separated list of case properties to display"
+        },
+        {
+            "propertyType": "property",
+            "type": "boolean",
+            "id": "isloggedonuser",
+            "defaultValue":false,
+            "required": true,
+            "visibility": false,
+            "title": "Display the logged on user"
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "userimageretrieveurl",
+            "defaultValue": "",
+            "visibility": true,
+            "title": "Url to retrieve the user. The USERID string will be replaced at runtime",
+   			"help": "acmwrh95.htm"
+        }        
+    ],
+    "events":[
+	        {
+            "id": "idirectdoc.SendPersonInfo",
+            "title": "Send Person information",
+            "functionName": "handleICM_SendPersonInfoEvent",
+            "direction": "subscribed",
+            "description": "Display the person that is specified in the event payload."
+        }    
+     ]
+}

@@ -1,0 +1,26 @@
+{
+    "Name":"iDirectDoc ICM custom widget package",
+    "Description":"iDirectDoc IBM Case Manager custom widget package",
+    "Locale":"",
+    "Version":"5.3.1",
+    "Categories":[
+        {
+            "id":"iDirectDocWidgets",
+            "title":"iDirectDoc Custom Widgets"
+        }
+    ],
+    "Widgets":[
+		{
+		    "id": "PersonInfo",
+		    "title": "Person Information",
+		    "category": "iDirectDocWidgets",
+		    "description": "Displays details about the current user or a user id recieved via an event",
+		    "definition": "PersonInfo.json",
+		    "preview": "images/caseinfo_preview.png",
+		    "icon": "images/caseinfo_icon.png",
+		    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.personinfo.PersonInfo",
+		    "help": "acmwrh94.htm",
+		    "previewThumbnail": "images/caseinfo_thumb.gif"
+		}				
+	]
+}

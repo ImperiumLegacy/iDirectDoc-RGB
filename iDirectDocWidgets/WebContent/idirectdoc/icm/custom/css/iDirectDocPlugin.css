@@ -1,0 +1,32 @@
+.oneui.ecm.icn .ecmLoginPane .loginForm {
+	background-size: 165px auto;
+}
+
+.ecmBanner .container img.productLogo, .ecmBanner .logo .logoImage img {
+	height: 40px;
+}
+
+.oneui.ecm.iDirectDoc .ecmLoginPane .loginForm{
+	background-size: 165px auto;
+}
+
+.personInfoUserImage{
+	border-radius: 50%;
+}
+
+.personInfoBold {
+	font-size: 17px;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.personInfoBox {
+    border-radius: 25px;
+    cellpadding: 10px;
+}
+
+.personInfoRegular{
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px;
+}
