@@ -65,6 +65,11 @@ define([
 			
 				var actionArguments = this.getArguments();
 				var iFrameURL = this.pluginconfig[actionArguments.url];
+				
+				console.debug("iFrameURL : ",iFrameURL);
+				if(!iFrameURL) iFrameURL=actionArguments.url;
+				console.debug("adjusted iFrameURL : ",iFrameURL);
+				
 				this.websiteDialog = new BaseDialog(
 					{
 						contentString: "<iframe style='width:100%;height:100%;display:block;border:none;' src='"+iFrameURL+"' />",
