@@ -16,8 +16,13 @@
         	<include name="**/*.*" />
         </fileset>
     </war>
+	<war destfile="./iDirectDocServices.war" webxml="../iDirectDocServices/WebContent/WEB-INF/web.xml">
+        <fileset dir="../iDirectDocServices/WebContent">
+        	<include name="**/*.*" />
+        </fileset>
+    </war>
 </target>
-
+	
 <target name="createEAR">
 	<ear destfile="./iDirectDocWidgets.ear" appxml="./WebContent/META-INF/application.xml">
 	      <fileset dir="." includes="*.war"/>
