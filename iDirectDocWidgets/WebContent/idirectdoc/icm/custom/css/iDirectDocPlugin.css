@@ -6,6 +6,16 @@
 	height: 40px;
 }
 
+.pvrLayout .dijitTitlePane {
+	border: 3px solid lightgrey;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+.ecm.icn .ecmLoginPane{
+	background: linear-gradient(#2d4d6b, #4595fd) !important;	
+}
+
 .oneui.ecm.iDirectDoc .ecmLoginPane .loginForm{
 	background-size: 165px auto;
 }
