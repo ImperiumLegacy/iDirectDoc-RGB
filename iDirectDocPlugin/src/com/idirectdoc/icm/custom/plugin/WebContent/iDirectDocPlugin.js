@@ -1,14 +1,16 @@
 require(["dojo/_base/declare",
          "dojo/_base/lang",
          "dojo/aspect",
+         "dojo/dom-construct",
          "icm/widget/SelectorTabContainer",
          "dojo/dom-construct",
          "dijit/registry", 
          "ecm/model/Desktop",
          "dojo/aspect",
          "dojo/dom-style",
-         "dojo/query"], 
-function(declare, lang, aspect, SelectorTabContainer, domConstruct, registry, Desktop, aspect, domStyle, query) {		
+         "dojo/query",
+         "dojo/string"], 
+function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct, registry, Desktop, aspect, domStyle, query, string) {		
 	/**
 	 * Use this function to add any global JavaScript methods your plug-in requires.
 	 */
@@ -64,7 +66,44 @@ function(declare, lang, aspect, SelectorTabContainer, domConstruct, registry, De
 	    // we still want the original functionality to fire
 		oldPCTC.call(this, arguments);
 	};
+
+	var launchBarContainer = ecm.widget.layout.LaunchBarContainer.prototype;
+	var oldPCLB = launchBarContainer.startup;
 	
+    //modify the Dijit's prototype
+	launchBarContainer.postCreate = function(){
+		console.debug('Inside modify launchBarContainer postCreate', this.launchBarButtonArea);
+		var urlParams = dojo.queryToObject(document.location.search);
+		console.debug('launchBarContainer urlParams', urlParams);
+		
+		if(urlParams && !urlParams.showLaunchBar=="true"){
+			console.debug('launchBarContainer is being hidden');
+			domStyle.set(this.launchBarButtonArea.domNode, "display", "none");
+			domStyle.set(this.launchBarButtonArea.domNode, "height", "0px");
+		}
+	    // call the original prototype method;
+	    // we still want the original functionality to fire
+		oldPCLB.call(this, arguments);
+		
+	}
+	
+	var pvrTitlePane = pvr.widget.TitledLayout.prototype;
+	var oldPCPTP = pvrTitlePane.startup;
+	
+    //modify the Dijit's prototype
+	pvrTitlePane.startup = function(){
+		console.debug('Inside modify pvrTitlePane startup', this.titleNode);
+		console.debug('Inside modify pvrTitlePane startup domNode', this.titleNode.id);
+		
+	    // call the original prototype method;
+	    // we still want the original functionality to fire
+		oldPCPTP.call(this, arguments);
+		var cssClassName = this.title.split(" ").join("");
+		
+		domConstruct.place("<img style='height:20px;width:20px' src='/iDirectDocWidgets/idirectdoc/icm/custom/images/"+cssClassName+".png')></img>",this.titleNode.id,"before");
+	}
+
+
 	try{
 		aspect.after(Desktop, "onLogin", 
 			function(repo){

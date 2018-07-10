@@ -2,7 +2,7 @@
     "Name":"iDirectDoc ICM custom widget package",
     "Description":"iDirectDoc IBM Case Manager custom widget package",
     "Locale":"",
-    "Version":"5.3.1",
+    "Version":"5.3.2",
     "Categories":[
         {
             "id":"iDirectDocWidgets",
@@ -21,6 +21,42 @@
 		    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.personinfo.PersonInfo",
 		    "help": "acmwrh94.htm",
 		    "previewThumbnail": "images/caseinfo_thumb.gif"
-		}				
+		},
+		{
+		    "id": "Timeline",
+		    "title": "Timeline",
+		    "category": "iDirectDocWidgets",
+		    "description": "Displays timeline chart",
+		    "definition": "Timeline.json",
+		    "preview": "images/caseinfo_preview.png",
+		    "icon": "images/caseinfo_icon.png",
+		    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.timeline.Timeline",
+		    "help": "acmwrh94.htm",
+		    "previewThumbnail": "images/caseinfo_thumb.gif"
+		},
+		{
+		    "id": "Search for Specific Case Types",
+		    "title": "Search for Specific Case Types",
+		    "category": "iDirectDocWidgets",
+		    "description": "Search for Specific Case Types",
+		    "definition": "SpecificCaseSearch.json",
+		    "preview": "images/caseinfo_preview.png",
+		    "icon": "images/caseinfo_icon.png",
+		    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.specificcasesearch.SpecificCaseSearch",
+		    "help": "acmwrh94.htm",
+		    "previewThumbnail": "images/caseinfo_thumb.gif"
+		},
+		{
+		    "id": "MyCalendar",
+		    "title": "My Calendar",
+		    "category": "iDirectDocWidgets",
+		    "description": "Displays Appointments for the current user",
+		    "definition": "MyCalendar.json",
+		    "preview": "images/caseinfo_preview.png",
+		    "icon": "images/caseinfo_icon.png",
+		    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.mycalendar.MyCalendar",
+		    "help": "acmwrh94.htm",
+		    "previewThumbnail": "images/caseinfo_thumb.gif"
+		}						
 	]
 }

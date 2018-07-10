@@ -2,41 +2,95 @@
 	background-size: 165px auto;
 }
 
-.ecmBanner .container img.productLogo, .ecmBanner .logo .logoImage img {
-	height: 40px;
-}
-
 .pvrLayout .dijitTitlePane {
 	border: 3px solid lightgrey;
 	margin-bottom: 10px;
 	border-radius: 3px;
 }
 
+.icmCaseInfo{
+	border: 3px solid lightgrey;
+	margin-bottom: 10px;
+	border-radius: 3px;	
+}
+
 .ecm.icn .ecmLoginPane{
 	background: linear-gradient(#2d4d6b, #4595fd) !important;	
 }
 
+.ecm.icn .ecmLoginPane .loginBorder{
+	border-radius: 10px;
+}
+
+.ecmLoginPane .title{
+	color: #2d4d6b;
+}
+.ecmBanner .container img.productLogo, .ecmBanner .logo .logoImage img {
+	height: 40px;
+}
+
+.ecmLaunchBarContainer .launchBarButtonAreaTop{
+	display:none;
+}
 .oneui.ecm.iDirectDoc .ecmLoginPane .loginForm{
 	background-size: 165px auto;
+}
+
+.pvrObjectTable.pvrObjectTable label{
+	display: none;
+}
+
+.oneui .idxTitlePane .dijitTitlePaneTitle{
+	background: linear-gradient(#ffffff, #b0c9f7);
+}
+
+.icmCaseInfoHoverLink{
+	color: red;
 }
 
 .personInfoUserImage{
 	border-radius: 50%;
 }
 
+
 .personInfoBold {
 	font-size: 17px;
 	font-weight: bold;
 	padding: 10px;
 }
+.personInfoText{
+	padding: 10px;
+}
 
 .personInfoBox {
-    border-radius: 25px;
+    border-radius: 3px;
+	border: 3px solid lightgrey;
+	background: linear-gradient(#ffffff, #b0c9f7);
     cellpadding: 10px;
+	width:100%;
 }
 
 .personInfoRegular{
 	font-size: 14px;
 	font-weight: bold;
 	padding: 10px;
+}
+
+.claro .dojoxCalendarEvent.Calendar2 .bg {
+  background-color: #00AA00;
+}
+.claro .dojoxCalendarEvent.Calendar2.Hovered .bg {
+  background-color: #00FF00;
+}
+.claro .dojoxCalendarEvent.Calendar2.Selected .bg {
+  background-color: #004400;
+}
+.claro .dojoxCalendarEvent.Calendar1 .bg {
+  background-color: #0000AA;
+}
+.claro .dojoxCalendarEvent.Calendar1.Hovered .bg {
+  background-color: #0000FF;
+}
+.claro .dojoxCalendarEvent.Calendar1.Selected .bg {
+  background-color: #000044;
 }

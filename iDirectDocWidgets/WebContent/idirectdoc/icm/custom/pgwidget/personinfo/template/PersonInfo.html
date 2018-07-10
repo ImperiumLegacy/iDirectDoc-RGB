@@ -4,14 +4,27 @@
 			<td>
 				<img class="personInfoUserImage" style="width=50px;height=50px" data-dojo-attach-point="UserImage"/>
 			</td>
-			<td>
-				<table data-dojo-attach-point="UserDetails">
-					<tr><td> <span class="personInfoBold" data-dojo-attach-point="UserName"></span></td></tr>
-					<tr><td> <div data-dojo-attach-point="Dob"><span class="personInfoRegular">DOB:</span><span  data-dojo-attach-point="DobVal"></span></div></td></tr>
-					<tr><td> <div data-dojo-attach-point="Gender"><span class="personInfoRegular">Gender:</span><span  data-dojo-attach-point="GenderVal"></span></div></td></tr>
+			<td> 
+				<table>
+				<tr><td> <span class="personInfoBold" data-dojo-attach-point="UserName"></span></td></tr>
+				<tr><td> <div data-dojo-attach-point="Dob"><span class="personInfoText" data-dojo-attach-point="DobVal"></span></div></td></tr>
+				<tr><td> <div data-dojo-attach-point="Gender"><span class="personInfoText" data-dojo-attach-point="GenderVal"></span></div></td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2>
+				<table data-dojo-attach-point="UserDetails" style="padding:5px">
+					<tbody id="UserDetails">
 					<tr><td> <div data-dojo-attach-point="Identifier"><span class="personInfoRegular">ID :</span><span data-dojo-attach-point="IdentifierVal"></span></div></td></tr>
-
- 				<table>
+					<tr><td> <div data-dojo-attach-point="Insurance"><span class="personInfoRegular">Insurance :</span><span data-dojo-attach-point="InsuranceVal"></span></div></td></tr>
+					</tbody>
+ 				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2>
+				<div id="AdditionalProps" data-dojo-attach-point="AdditionalProps"/>
 			</td>
 		</tr>
 	</table>

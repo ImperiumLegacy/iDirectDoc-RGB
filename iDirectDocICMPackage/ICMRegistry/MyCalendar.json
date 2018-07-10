@@ -1,0 +1,92 @@
+{
+    "id": "MyCalendar",
+    "title": "My Calendar",
+    "category": "iDirectDocWidgets",
+    "description": "Displays event objects(from filenet repo) on the users calendar.",
+    "definition": "MyCalendar.json",
+    "preview": "images/caseinfo_preview.png",
+    "icon": "images/caseinfo_icon.png",
+    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.mycalendar.MyCalendar",
+    "help": "acmwrh94.htm",
+    "previewThumbnail": "images/caseinfo_thumb.gif",
+    "properties": [
+    	{
+            "propertyType": "property",
+            "type": "string",
+            "id": "starttimeproperty",
+            "defaultValue": "",
+            "required": true,
+            "visibility": true,
+            "title": "Appointment Start Time Property(without the prefix)"
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "endtimeproperty",
+            "defaultValue":"",
+            "required": true,
+            "visibility": true,
+            "title": "Appointment End Time Property(without the prefix)"
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "summary",
+            "defaultValue":"",
+            "required": true,
+            "visibility": true,
+            "title": "Summary Property"
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "appointmentclass",
+            "defaultValue":"",
+            "required": true,
+            "visibility": true,
+            "title": "Class Name of the Appointment Objects(without the prefix)"
+        },
+        {
+            "propertyType": "property",
+            "type": "number",
+            "id": "daystarthour",
+            "defaultValue":8,
+            "required": true,
+            "visibility": true,
+            "title": "Hour the day starts(0-23)"
+        },
+        {
+            "propertyType": "property",
+            "type": "number",
+            "id": "dayendhour",
+            "defaultValue":18,
+            "required": true,
+            "visibility": true,
+            "title": "Hour the day ends(1-36)"
+        }                
+    ],
+    "events":[
+	        {
+            "id": "icm.SendCaseInfo",
+            "title": "Recieve Case Info",
+            "functionName": "handleICM_SendCaseInfoEvent",
+            "direction": "subscribed",
+            "description": "Display the case info payload."
+        },{
+            "id": "idirectdoc.EventAdded",
+            "title": "Appointment Event Added",
+            "direction": "published",
+            "description": "An Appointment Event was added."
+        },{
+            "id": "idirectdoc.EventEdited",
+            "title": "Appointment Event Edited",
+            "direction": "published",
+            "description": "An Appointment Event was edited."
+        },{
+            "id": "idirectdoc.EventDeleted",
+            "title": "Appointment Event Deleted",
+            "direction": "published",
+            "description": "An Appointment Event was deleted."
+        }    
+     ]
+}

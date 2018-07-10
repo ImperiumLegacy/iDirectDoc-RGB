@@ -1,0 +1,50 @@
+{
+    "id": "Timeline",
+    "title": "Timeline Chart",
+    "category": "iDirectDocWidgets",
+    "description": "Displays timeline of a business object property.",
+    "definition": "Timeline.json",
+    "preview": "images/caseinfo_preview.png",
+    "icon": "images/caseinfo_icon.png",
+    "runtimeClassName": "idirectdoc.icm.custom.pgwidget.timeline.Timeline",
+    "help": "acmwrh94.htm",
+    "previewThumbnail": "images/caseinfo_thumb.gif",
+    "properties": [
+    	{
+            "propertyType": "property",
+            "type": "string",
+            "id": "businessobjectproperty",
+            "defaultValue": "",
+            "required": true,
+            "visibility": true,
+            "title": "Business Object Property Symbolic name "
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "dateproperty",
+            "defaultValue":"",
+            "required": true,
+            "visibility": true,
+            "title": "x-Axis Date Property(Comma Separated)"
+        },
+        {
+            "propertyType": "property",
+            "type": "string",
+            "id": "chartproperty",
+            "defaultValue":"",
+            "required": true,
+            "visibility": true,
+            "title": "y-Axis Numeric Property(Comma Separated)"
+        }        
+    ],
+    "events":[
+	        {
+            "id": "icm.SendCaseInfo",
+            "title": "Recieve Case Info",
+            "functionName": "handleICM_SendCaseInfoEvent",
+            "direction": "subscribed",
+            "description": "Display the case info payload."
+        }    
+     ]
+}
