@@ -63,9 +63,11 @@ define([
 		 */
 		handleICM_SendCaseInfoEvent: function(payload){
 			console.debug("handleICM_SendCaseInfoEvent in "+this.dojoAttachPoint,payload);
+			
 			if(!payload){
 				return;
 			}
+			this.caseEditable = payload.caseEditable;
 			
 			this.logInfo("handleICM_SendPersonInfoEvent"+this.dojoAttachPoint, payload.caseEditable);
 		},
@@ -106,6 +108,10 @@ define([
 				endTimeAttr: "end",
 				columnViewProps:{minHours:6},
 				style: "position:relative;width:100%;height:600px",
+				cssClassFunc: function(item){
+					console.debug("css class function",item);
+					return item.calendar;
+				},
 				decodeDate: function(s){
 					console.debug("decodeDate in My Calendar",s);		
 					var dispDate = stamp.fromISOString(s)
@@ -190,14 +196,18 @@ define([
 			var repo = this.solution.targetObjectStore;
 			var solnPrefix = this.solution.getPrefix();
 			var className = solnPrefix+"_Event";
-			var additionalProps = "["+solnPrefix+"_StartTime],["+solnPrefix+"_EndTime],["+solnPrefix+"_EventSummary]";
+			var additionalProps = "["+solnPrefix+"_StartTime],["+solnPrefix+"_EndTime],["+solnPrefix+"_EventSummary],["+solnPrefix+"_Doctor]";
 			var colsToRet = ["Id", solnPrefix + "_StartTime",solnPrefix + "_EndTime",solnPrefix + "_EventSummary"];
 			var sqlBase = "SELECT  [Id] , " +
 				"[ClassDescription], [DateLastModified], [FolderName], " + additionalProps +
 				" FROM ["+className+"] ";
 
 			/*Define optional where clause, to specify Working / Complete / etc.*/
-			var sqlWhere=" WHERE ["+solnPrefix+"_Doctor]='"+userId+"'";
+			var sqlWhere="";
+			
+			//There is a doctor case, so show only this doctor
+			if(this.caseEditable)
+				sqlWhere = " WHERE ["+solnPrefix+"_Doctor]='"+userId+"'";
 			var ceQuery = sqlBase + sqlWhere;
 			console.info("ceQuery",ceQuery);
 			var searchQuery = new SearchQuery({repository: repo,
@@ -214,15 +224,16 @@ define([
 					console.debug("Search returned ",resultSet);
 					caseCount = resultSet.totalCount;
 					console.debug("Working Case Count = " + caseCount);
+					this.appointments.length=0;
 					if(caseCount>0){
 						var i=1;
-						this.appointments.length=0;
+
 						array.forEach(resultSet.items, lang.hitch(this,function(oneItem){
 							console.debug("oneItem",oneItem);
 
 							var oneAppt = {
 								id:oneItem.attributes["Id"],
-								calendar: "Calendar1",
+								calendar: oneItem.attributes[solnPrefix+"_Doctor"],
 								summary:oneItem.attributes[solnPrefix+"_EventSummary"],
 								guid:oneItem.attributes["Id"],
 								begin:oneItem.attributes[solnPrefix+"_StartTime"],
@@ -234,13 +245,12 @@ define([
 						}));
 						
 						console.debug("Appointments",this.appointments);
-			
-						var eventStore = new Observable(new Memory({data: this.appointments}));
-						this.calendar.set("store", eventStore);
-						
 					}else{
 						console.warn("No appointment cases found  ");
 					}
+
+					var eventStore = new Observable(new Memory({data: this.appointments}));
+					this.calendar.set("store", eventStore);
 
 				}catch (Error) {
 					console.error (Error.toString());

@@ -29,9 +29,10 @@
 	height: 40px;
 }
 
-.ecmLaunchBarContainer .launchBarButtonAreaTop{
-	display:none;
+.ecm.icn .icmCaseInfoIconClass {
+    background: url(/iDirectDocWidgets/idirectdoc/icm/custom/images/Person.png) no-repeat;
 }
+
 .oneui.ecm.iDirectDoc .ecmLoginPane .loginForm{
 	background-size: 165px auto;
 }
@@ -74,23 +75,4 @@
 	font-size: 14px;
 	font-weight: bold;
 	padding: 10px;
-}
-
-.claro .dojoxCalendarEvent.Calendar2 .bg {
-  background-color: #00AA00;
-}
-.claro .dojoxCalendarEvent.Calendar2.Hovered .bg {
-  background-color: #00FF00;
-}
-.claro .dojoxCalendarEvent.Calendar2.Selected .bg {
-  background-color: #004400;
-}
-.claro .dojoxCalendarEvent.Calendar1 .bg {
-  background-color: #0000AA;
-}
-.claro .dojoxCalendarEvent.Calendar1.Hovered .bg {
-  background-color: #0000FF;
-}
-.claro .dojoxCalendarEvent.Calendar1.Selected .bg {
-  background-color: #000044;
 }

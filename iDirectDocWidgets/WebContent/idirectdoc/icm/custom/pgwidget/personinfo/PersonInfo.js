@@ -78,9 +78,10 @@ define([
 		
 		displayUser(userId, userFullName, dob, gender, insurance, caseEditable){
 			console.debug("displayUser in Person Info",userId, userFullName, dob, gender, caseEditable);
-			var userImageUrl = this.widgetProperties["userimageretrieveurl"];
-			userImageUrl = userImageUrl.replace("{USERID}",userId.toLowerCase());
-			this.UserImage.src = userImageUrl;
+			var _self= this;
+			//var userImageUrl = this.widgetProperties["userimageretrieveurl"];
+			//userImageUrl = userImageUrl.replace("{USERID}",userId.toLowerCase());
+			//this.UserImage.src = userImageUrl;
 			this.UserName.innerHTML = userFullName ;
 		
 			if(dob)	this.DobVal.innerHTML = dob ;
@@ -116,7 +117,30 @@ define([
 				};
 				table+="</table>"
 				this.AdditionalProps.innerHTML = table;
+				
 			}
+
+			//Try to set the users image if possible
+			caseEditable.caseObject.retrieveCaseFolder(function(contentItem){
+				console.debug("Case folder contentitem is ",contentItem);
+				contentItem.retrieveFolderContents(false,function(resultSet){
+					console.debug("Case folder contents are ",resultSet);
+					var profileImageItem=null;
+					array.some(resultSet.items, function(oneItem){
+						if(oneItem.template == "IDC_ProfileImage"){
+							profileImageItem = oneItem;
+							return true;
+						}
+					});
+					if(profileImageItem){
+						var contentType = profileImageItem.getContentType();
+						var contentUrl =  profileImageItem.getContentUrl();
+						_self.UserImage.src = contentUrl;
+						console.debug("Type and URL",contType,contUrl);
+					}
+					
+				},"DateLastModified",true,true,null,{"ClassDescription": "IDC_ProfileImage"});			
+			});
 			
 		}
 	});

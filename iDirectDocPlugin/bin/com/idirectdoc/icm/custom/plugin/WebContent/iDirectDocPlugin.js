@@ -1,16 +1,19 @@
 require(["dojo/_base/declare",
-         "dojo/_base/lang",
+		 "dojo/_base/lang",
+  		 "dojo/_base/array",
          "dojo/aspect",
          "dojo/dom-construct",
          "icm/widget/SelectorTabContainer",
          "dojo/dom-construct",
          "dijit/registry", 
          "ecm/model/Desktop",
+         "ecm/model/SearchQuery",
          "dojo/aspect",
          "dojo/dom-style",
          "dojo/query",
          "dojo/string"], 
-function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct, registry, Desktop, aspect, domStyle, query, string) {		
+function(declare, lang, array, aspect, domConstruct, SelectorTabContainer, domConstruct, registry, Desktop,SearchQuery, 
+		aspect, domStyle, query, string) {		
 	/**
 	 * Use this function to add any global JavaScript methods your plug-in requires.
 	 */
@@ -71,12 +74,12 @@ function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct
 	var oldPCLB = launchBarContainer.startup;
 	
     //modify the Dijit's prototype
-	launchBarContainer.postCreate = function(){
+	/*launchBarContainer.postCreate = function(){
 		console.debug('Inside modify launchBarContainer postCreate', this.launchBarButtonArea);
 		var urlParams = dojo.queryToObject(document.location.search);
 		console.debug('launchBarContainer urlParams', urlParams);
 		
-		if(urlParams && !urlParams.showLaunchBar=="true"){
+		if(urlParams && urlParams.showLaunchBar!="true"){
 			console.debug('launchBarContainer is being hidden');
 			domStyle.set(this.launchBarButtonArea.domNode, "display", "none");
 			domStyle.set(this.launchBarButtonArea.domNode, "height", "0px");
@@ -85,7 +88,7 @@ function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct
 	    // we still want the original functionality to fire
 		oldPCLB.call(this, arguments);
 		
-	}
+	}*/
 	
 	var pvrTitlePane = pvr.widget.TitledLayout.prototype;
 	var oldPCPTP = pvrTitlePane.startup;
@@ -107,7 +110,7 @@ function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct
 	try{
 		aspect.after(Desktop, "onLogin", 
 			function(repo){
-				console.debug("Logged in...",repo);
+				console.debug("Logged in...",repo,Desktop);
 				//.dijitIcon.person
 				console.debug('person icont',query(".dijitIcon.person"));
 				var domNode = query(".dijitIcon.person")
@@ -116,13 +119,61 @@ function(declare, lang, aspect, domConstruct, SelectorTabContainer, domConstruct
 					backgroundSize: "32px 32px;"
 				});*/
 				console.debug("domNode",domNode);
-				domStyle.set(domNode[0],
-					{
-						backgroundImage: "url('/iDirectDocWidgets/idirectdoc/icm/custom/images/"+Desktop.userId.toLowerCase()+".jpg')",
-						backgroundSize: "32px",
-						borderRadius: "20%"
+				var repo = Desktop.getRepository(Desktop.defaultRepositoryId);
+				var solnPrefix = "IDC";
+				
+				/*Define base SQL select against a particular case type*/
+				var sqlBase = "SELECT  [Id] , " +
+				  "[ClassDescription], [DateLastModified] " +
+				  " FROM ["+solnPrefix+"_ProfileImage] WHERE "+ "["+solnPrefix+"_ClientIdentifier]='"+Desktop.userId.toLowerCase()+"'";
+
+				/*Define optional where clause, to specify Working / Complete / etc.*/
+				//var sqlWhere=" WHERE ["+solnPrefix+"_ClientIdentifier]='"+userId+"'";
+				var ceQuery = sqlBase ;
+				console.info("ceQuery",ceQuery, repo);
+				var searchQuery = new SearchQuery({repository: repo,
+					   pageSize:0,
+					   query:ceQuery,
+					   resultsDisplay: {columns: ["Id",solnPrefix+"_ClientIdentifier"]},
+					   retrieveAllVersions:false,
+					   retrieveLatestVersion:true});
+				
+				console.info("searchQuery",searchQuery);
+				
+				searchQuery.search(
+					function(resultSet){
+						console.debug("Search for current user image returned ",resultSet);
+						var profileImageItem=null;
+						array.some(resultSet.items, function(oneItem){
+							if(oneItem.template == "IDC_ProfileImage"){
+								profileImageItem = oneItem;
+								return true;
+							}
+						});
+						if(profileImageItem){
+							var contentType = profileImageItem.getContentType();
+							var contentUrl =  profileImageItem.getContentUrl();
+							//_self.UserImage.src = contentUrl;
+							console.debug("Type and URL",contentType,contentUrl);
+							domStyle.set(domNode[0],
+								{
+									backgroundImage: "url('"+contentUrl+"')",
+									backgroundSize: "32px",
+									borderRadius: "20%"
+								}
+							);
+						}
+						
+					},
+					"DateLastModified",true,null,
+					function(error){
+						console.error("Searching for user image failed",error);
 					}
+					
 				);
+				
+				
+
 				
 			}
 		);		
