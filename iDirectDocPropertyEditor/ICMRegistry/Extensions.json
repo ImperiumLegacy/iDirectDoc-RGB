@@ -1,0 +1,22 @@
+{
+	"Name": "iDirectDocPropertyEditor",
+	"Description": "A set of custom editors for iDirectDoc",
+	"Locale": "",
+	"Version": "1.0.2",
+	"Extensions": [
+		{
+			"id": "ICDCodeEditor",
+			"title": "ICDCodeEditor",
+			"description": "ICD Code Picker",
+			"type": "ViewDesignerExtensions",
+			"packages": {
+				"com/idirectdoc/editors": "/navigator/plugin/iDirectDocEditor/getResource/com/idirectdoc/editors"
+			},
+			"css": [
+				  "/navigator/plugin/iDirectDocEditor/getResource/com/idirectdoc/editors/resources/ICDCodeEditor.css"
+			],
+			"bootstrapModule": "com/idirectdoc/editors/Initializer",
+			"bootstrapMethod": "initialize"
+		}
+	]
+}

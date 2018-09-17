@@ -1,0 +1,14 @@
+<div>
+    <table class="propertyTable" role="presentation">
+        <tr>
+            <td class="propertyRowLabel">
+                <span class="required" style="display:none">*</span>
+                <label for="${id}_externalICDCodeUrl">External URL for ICD Codes:</label>&nbsp;
+                <div data-dojo-type="ecm.widget.HoverHelp" data-dojo-attach-point="externalICDCodeUrlHoverHelp" message="Specify an external URL for ICD Codes."></div>
+            </td>
+            <td class="propertyRowValue">
+                <div id="${id}_externalICDCodeUrl" data-dojo-attach-point="externalICDCodeUrlBox" data-dojo-attach-event="onKeyUp: _onFieldChange" data-dojo-type="ecm.widget.ValidationTextBox" required="false" trim="true" propercase="false"></div>
+            </td>
+        </tr>
+    </table>
+</div>
