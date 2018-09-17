@@ -27,5 +27,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Customers/IMPERIUM/Workspace/iDirectDocServices/WebContent/WEB-INF/lib/Jace.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
