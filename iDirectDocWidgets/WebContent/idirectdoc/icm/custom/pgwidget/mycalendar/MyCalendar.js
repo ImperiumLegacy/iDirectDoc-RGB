@@ -377,6 +377,60 @@ define([
 			
 			
 					
+		},
+		
+		
+		getPatients: function(context, complete, abort){
+			var className = solnPrefix + "_Episode";
+			var additionalProps = "["+solnPrefix + "_FullName],["+solnPrefix + "_ClientIdentifier],["+solnPrefix + "_FirstName],["+solnPrefix + "_LastName]";
+			var colsToRet = ["Id", solnPrefix + "_FullName",solnPrefix + "_ClientIdentifier",solnPrefix + "_FirstName",solnPrefix + "_ClientIdentifier",solnPrefix + "_LastName"];
+			
+			/*Define base SQL select against a particular case type*/
+			var sqlBase = "SELECT  [Id] , " +
+			  "[ClassDescription], [DateLastModified], [FolderName], " + additionalProps +
+			  " FROM ["+className+"] ";
+
+			/*Define optional where clause, to specify Working / Complete / etc.*/
+			//var sqlWhere=" WHERE ["+solnPrefix+"_ClientIdentifier]='"+userId+"'";
+			var ceQuery = sqlBase ;
+			console.info("ceQuery",ceQuery);
+			var searchQuery = new SearchQuery({repository: repo,
+				   pageSize:0,
+				   query:ceQuery,
+				   resultsDisplay: {columns: colsToRet},
+				   retrieveAllVersions:false,
+				   retrieveLatestVersion:true});
+
+			var caseCount = 0;
+			_self.patientChoices = [];
+			searchQuery.search(function(resultSet){
+			try {
+				console.debug("Search returned ",resultSet);
+				caseCount = resultSet.totalCount;
+				console.debug("Working Case Count = " + caseCount);
+				if(caseCount>0){
+					array.forEach(resultSet.items, function(oneItem){
+						console.debug("oneItem",oneItem);
+						
+						var oneChoice = {
+							label:oneItem.attributes[solnPrefix+"_FirstName"] +" "+oneItem.attributes[solnPrefix+"_LastName"],
+							value:oneItem.attributes[solnPrefix+"_ClientIdentifier"]
+						};
+						_self.patientChoices.push(oneChoice);
+					});
+					
+					console.debug("patientChoices",_self.patientChoices);
+					
+				}else{
+					console.warn("No patient cases found  ");
+				}
+
+			}catch (Error) {
+				console.error (Error.toString());
+			}
+			});
 		}
+		
+		
 	});
 });	

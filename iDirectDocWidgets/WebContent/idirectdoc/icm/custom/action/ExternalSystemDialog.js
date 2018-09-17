@@ -57,18 +57,31 @@ define([
 			
 			execute: function()
 			{
-				console.debug("Executing External System Action!");
+				console.debug("Executing External System Action!",context);
 				
 				console.debug("this : " , this);
 				console.debug("this.getArguments : ", this.getArguments());
 				console.debug("ecm.model.desktop : ",ecm.model.desktop);
 			
 				var actionArguments = this.getArguments();
-				var iFrameURL = this.pluginconfig[actionArguments.url];
+				var iFrameURL = null;
+				
+				try{
+					iFrameURL = this.pluginconfig[actionArguments.url];
+				}catch(e){
+					console.warn("iFrameURL not present",e);
+				}
 				
 				console.debug("iFrameURL : ",iFrameURL);
 				if(!iFrameURL) iFrameURL=actionArguments.url;
 				console.debug("adjusted iFrameURL : ",iFrameURL);
+				
+				//Macros
+				iFrameURL = iFrameURL.replace("{CurrentUserId}", ecm.model.desktop.userId);
+				if(context.model.workItemEditable)
+					iFrameURL = iFrameURL.replace("{HipNationID}", context.model.workItemEditable.propertiesCollection.IDC_HipNationID.value + "@idirectdoc.com");
+				else
+					iFrameURL = iFrameURL.replace("{HipNationID}", context.model.caseEditable.propertiesCollection.IDC_HipNationID.value + "@idirectdoc.com");
 				
 				this.websiteDialog = new BaseDialog(
 					{
